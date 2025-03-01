@@ -2,6 +2,9 @@ import random
 import gymnasium as gym
 import numpy as np
 
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
 env = gym.make('FrozenLake-v1', desc=None, map_name="4x4", is_slippery=False, render_mode="human")
 observation_space_size = env.observation_space.n
 print(observation_space_size)
@@ -10,6 +13,11 @@ print(action_space_size)
 q_table = np.zeros((observation_space_size, action_space_size))
 print(q_table)
 
+# data = np.random.rand(observation_space_size, action_space_size)  # 初始化二维数据
+# fig, ax = plt.subplots()  # 创建一个图形和一个子图
+# im = ax.imshow(data, cmap='viridis')  # 创建一个图像对象
+# plt.ion()  # 打开交互模式
+# plt.show()
 
 total_episodes = 10000  # Total episodes 训练次数
 learning_rate = 0.8  # Learning rate 学习率
@@ -62,3 +70,14 @@ for episode in range(total_episodes):
     # Reduce epsilon (because we need less and less exploration) 随着智能体对环境熟悉程度增加，可以减少对环境的探索
     if epsilon < 0.95:
         epsilon = epsilon + 0.001
+
+    print(q_table)
+    # # 更新图像对象的数据
+    # im.set_array(q_table)
+    # # 刷新图形
+    # plt.draw()
+    # plt.pause(0.1)  # 暂停0.1秒以便图形有时间更新
+
+# # 关闭交互模式
+# plt.ioff()
+# plt.show()
